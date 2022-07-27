@@ -1,0 +1,553 @@
+Pointer Analysis Results:
+  %i      : { @(%i = alloca i32, align 4); }
+  %sum    : { @(%sum = alloca i32, align 4); }
+  %y      : { @(%y = alloca i32, align 4); }
+  %z      : { @(%z = alloca i32, align 4); }
+
+get store value operand:   %call = call i32 @getchar()
+get store value operand: i32 0
+Load type is integer
+  %sum = alloca i32, align 4
+Load in InMem
+Load Domain: Zero     
+Load type is integer
+  %i = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+Load type is integer
+  %sum = alloca i32, align 4
+Load in InMem
+Load Domain: Zero     
+get store value operand:   %add = add nsw i32 %2, %1
+Load type is integer
+  %sum = alloca i32, align 4
+Load in InMem
+Load Domain: Zero     
+get store value operand:   %sub = sub nsw i32 %3, 55
+Load type is integer
+  %i = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+Load type is integer
+  %y = alloca i32, align 4
+Load in InMem
+Load Domain: NonZero  
+get store value operand:   %div = sdiv i32 %4, %5
+get store value operand:   %call = call i32 @getchar()
+get store value operand: i32 0
+Load type is integer
+  %sum = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+Load type is integer
+  %i = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+Load type is integer
+  %sum = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+get store value operand:   %add = add nsw i32 %2, %1
+Load type is integer
+  %sum = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+get store value operand:   %sub = sub nsw i32 %3, 55
+Load type is integer
+  %i = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+Load type is integer
+  %y = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+get store value operand:   %div = sdiv i32 %4, %5
+Load type is integer
+  %sum = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+Load type is integer
+  %i = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+Load type is integer
+  %sum = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+get store value operand:   %add = add nsw i32 %2, %1
+Load type is integer
+  %sum = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+get store value operand:   %sub = sub nsw i32 %3, 55
+Load type is integer
+  %i = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+Load type is integer
+  %y = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+get store value operand:   %div = sdiv i32 %4, %5
+Load type is integer
+  %sum = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+Load type is integer
+  %i = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+Load type is integer
+  %sum = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+get store value operand:   %sub = sub nsw i32 %3, 55
+Load type is integer
+  %i = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+Load type is integer
+  %y = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+get store value operand:   %div = sdiv i32 %4, %5
+Dataflow Analysis Results:
+Instruction:   %i = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %sum = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %y = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %z = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %call = call i32 @getchar()
+In set: 
+
+Out set: 
+    [ %call    |-> MaybeZero ]
+
+Instruction:   store i32 %call, i32* %i, align 4
+In set: 
+    [ %call    |-> MaybeZero ]
+Out set: 
+    [ %call    |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+
+Instruction:   store i32 0, i32* %sum, align 4
+In set: 
+    [ %call    |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+Out set: 
+    [ %call    |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sum     |-> Zero      ]
+
+Instruction:   br label %while.cond
+In set: 
+    [ %call    |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sum     |-> Zero      ]
+Out set: 
+    [ %call    |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sum     |-> Zero      ]
+
+Instruction:   %0 = load i32, i32* %sum, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+
+Instruction:   %cmp = icmp slt i32 %0, 50
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+
+Instruction:   br i1 %cmp, label %while.body, label %while.end
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+
+Instruction:   %1 = load i32, i32* %i, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+
+Instruction:   %2 = load i32, i32* %sum, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+
+Instruction:   %add = add nsw i32 %2, %1
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+
+Instruction:   store i32 %add, i32* %sum, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+
+Instruction:   br label %while.cond
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+
+Instruction:   %3 = load i32, i32* %sum, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+
+Instruction:   %sub = sub nsw i32 %3, 55
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sub     |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+
+Instruction:   store i32 %sub, i32* %y, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sub     |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sub     |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+    [ %y       |-> MaybeZero ]
+
+Instruction:   %4 = load i32, i32* %i, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sub     |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+    [ %y       |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> MaybeZero ]
+    [ %4       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sub     |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+    [ %y       |-> MaybeZero ]
+
+Instruction:   %5 = load i32, i32* %y, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> MaybeZero ]
+    [ %4       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sub     |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+    [ %y       |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> MaybeZero ]
+    [ %4       |-> MaybeZero ]
+    [ %5       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sub     |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+    [ %y       |-> MaybeZero ]
+
+Instruction:   %div = sdiv i32 %4, %5
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> MaybeZero ]
+    [ %4       |-> MaybeZero ]
+    [ %5       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %i       |-> MaybeZero ]
+    [ %sub     |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+    [ %y       |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> MaybeZero ]
+    [ %4       |-> MaybeZero ]
+    [ %5       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %i       |-> MaybeZero ]
+    [ %sub     |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+    [ %y       |-> MaybeZero ]
+
+Instruction:   store i32 %div, i32* %z, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> MaybeZero ]
+    [ %4       |-> MaybeZero ]
+    [ %5       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %i       |-> MaybeZero ]
+    [ %sub     |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+    [ %y       |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> MaybeZero ]
+    [ %4       |-> MaybeZero ]
+    [ %5       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %i       |-> MaybeZero ]
+    [ %sub     |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+    [ %y       |-> MaybeZero ]
+    [ %z       |-> Uninit    ]
+
+Instruction:   ret void
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> MaybeZero ]
+    [ %4       |-> MaybeZero ]
+    [ %5       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %i       |-> MaybeZero ]
+    [ %sub     |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+    [ %y       |-> MaybeZero ]
+    [ %z       |-> Uninit    ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> MaybeZero ]
+    [ %4       |-> MaybeZero ]
+    [ %5       |-> MaybeZero ]
+    [ %add     |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %i       |-> MaybeZero ]
+    [ %sub     |-> MaybeZero ]
+    [ %sum     |-> MaybeZero ]
+    [ %y       |-> MaybeZero ]
+    [ %z       |-> Uninit    ]
+

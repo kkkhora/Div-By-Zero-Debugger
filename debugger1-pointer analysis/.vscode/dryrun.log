@@ -1,0 +1,10 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/guhuaying/cis547vm/lab7'
+chown -R --reference=CMakeLists.txt .
+zip -r /tmp/submission.zip include src test/*.c CMakeLists.txt 2> /dev/null
+mv /tmp/submission.zip ./submission.zip
+chown --reference=CMakeLists.txt submission.zip
+echo "submission.zip created successfully."
+ 
+make: Leaving directory `/Users/guhuaying/cis547vm/lab7'
+ 

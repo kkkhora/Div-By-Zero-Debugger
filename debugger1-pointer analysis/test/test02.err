@@ -1,0 +1,115 @@
+Pointer Analysis Results:
+  %retval : { @(%retval = alloca i32, align 4); }
+  %x      : { @(%x = alloca i32, align 4); }
+  %y      : { @(%y = alloca i32, align 4); }
+
+get store value operand: i32 0
+get store value operand:   %call = call i32 @getchar()
+Load type is integer
+  %x = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+get store value operand:   %div = sdiv i32 5, %0
+get store value operand: i32 0
+get store value operand:   %call = call i32 @getchar()
+Load type is integer
+  %x = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+get store value operand:   %div = sdiv i32 5, %0
+Dataflow Analysis Results:
+Instruction:   %retval = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %x = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %y = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   store i32 0, i32* %retval, align 4
+In set: 
+
+Out set: 
+    [ %retval  |-> Zero      ]
+
+Instruction:   %call = call i32 @getchar()
+In set: 
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %call    |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   store i32 %call, i32* %x, align 4
+In set: 
+    [ %call    |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %call    |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+    [ %x       |-> MaybeZero ]
+
+Instruction:   %0 = load i32, i32* %x, align 4
+In set: 
+    [ %call    |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+    [ %x       |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+    [ %x       |-> MaybeZero ]
+
+Instruction:   %div = sdiv i32 5, %0
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+    [ %x       |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+    [ %x       |-> MaybeZero ]
+
+Instruction:   store i32 %div, i32* %y, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+    [ %x       |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+    [ %x       |-> MaybeZero ]
+    [ %y       |-> Uninit    ]
+
+Instruction:   ret i32 0
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+    [ %x       |-> MaybeZero ]
+    [ %y       |-> Uninit    ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+    [ %x       |-> MaybeZero ]
+    [ %y       |-> Uninit    ]
+

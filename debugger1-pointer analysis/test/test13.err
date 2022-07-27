@@ -1,0 +1,253 @@
+Pointer Analysis Results:
+  %0      : { @(%a = alloca i32, align 4); }
+  %1      : { @(%a = alloca i32, align 4); }
+  %a      : { @(%a = alloca i32, align 4); }
+  %c      : { @(%c = alloca i32*, align 8); }
+  %d      : { @(%d = alloca i32*, align 8); }
+  %x      : { @(%x = alloca i32, align 4); }
+  @(%c = alloca i32*, align 8): { @(%a = alloca i32, align 4); }
+  @(%d = alloca i32*, align 8): { @(%a = alloca i32, align 4); }
+
+get store value operand: i32 1
+ptr1: %a      
+ptr2: %0      
+Store get Value Operand domain: 
+NonZero  
+Store get p Value Operand domain: 
+Uninit   
+Store get joined domain: 
+NonZero  
+ptr1: %a      
+ptr2: %1      
+Store get Value Operand domain: 
+NonZero  
+Store get p Value Operand domain: 
+Uninit   
+Store get joined domain: 
+NonZero  
+get store value operand: i32 0
+ptr1: %0      
+ptr2: %a      
+Store get Value Operand domain: 
+Zero     
+Store get p Value Operand domain: 
+NonZero  
+Store get joined domain: 
+MaybeZero
+ptr1: %0      
+ptr2: %1      
+Store get Value Operand domain: 
+Zero     
+Store get p Value Operand domain: 
+NonZero  
+Store get joined domain: 
+MaybeZero
+Load type is integer
+  %1 = load i32*, i32** %d, align 8
+Load in InMem
+Load Domain: MaybeZero
+get store value operand:   %div = sdiv i32 1, %2
+Load type is integer
+  %x = alloca i32, align 4
+Load in InMem
+Load Domain: Uninit   
+get store value operand: i32 1
+ptr1: %a      
+ptr2: %0      
+Store get Value Operand domain: 
+NonZero  
+Store get p Value Operand domain: 
+Uninit   
+Store get joined domain: 
+NonZero  
+ptr1: %a      
+ptr2: %1      
+Store get Value Operand domain: 
+NonZero  
+Store get p Value Operand domain: 
+Uninit   
+Store get joined domain: 
+NonZero  
+get store value operand: i32 0
+ptr1: %0      
+ptr2: %a      
+Store get Value Operand domain: 
+Zero     
+Store get p Value Operand domain: 
+NonZero  
+Store get joined domain: 
+MaybeZero
+ptr1: %0      
+ptr2: %1      
+Store get Value Operand domain: 
+Zero     
+Store get p Value Operand domain: 
+NonZero  
+Store get joined domain: 
+MaybeZero
+Load type is integer
+  %1 = load i32*, i32** %d, align 8
+Load in InMem
+Load Domain: MaybeZero
+get store value operand:   %div = sdiv i32 1, %2
+Load type is integer
+  %x = alloca i32, align 4
+Load in InMem
+Load Domain: Uninit   
+Dataflow Analysis Results:
+Instruction:   %a = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %c = alloca i32*, align 8
+In set: 
+
+Out set: 
+
+
+Instruction:   %d = alloca i32*, align 8
+In set: 
+
+Out set: 
+
+
+Instruction:   %x = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   store i32 1, i32* %a, align 4
+In set: 
+
+Out set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+
+Instruction:   store i32* %a, i32** %c, align 8
+In set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+Out set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+
+Instruction:   store i32* %a, i32** %d, align 8
+In set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+Out set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+
+Instruction:   %0 = load i32*, i32** %c, align 8
+In set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+Out set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+
+Instruction:   store i32 0, i32* %0, align 4
+In set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %a       |-> MaybeZero ]
+
+Instruction:   %1 = load i32*, i32** %d, align 8
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %a       |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %a       |-> MaybeZero ]
+
+Instruction:   %2 = load i32, i32* %1, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %a       |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> MaybeZero ]
+
+Instruction:   %div = sdiv i32 1, %2
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+
+Instruction:   store i32 %div, i32* %x, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %x       |-> Uninit    ]
+
+Instruction:   %3 = load i32, i32* %x, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %x       |-> Uninit    ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> Uninit    ]
+    [ %a       |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %x       |-> Uninit    ]
+
+Instruction:   ret i32 %3
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> Uninit    ]
+    [ %a       |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %x       |-> Uninit    ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> Uninit    ]
+    [ %a       |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %x       |-> Uninit    ]
+

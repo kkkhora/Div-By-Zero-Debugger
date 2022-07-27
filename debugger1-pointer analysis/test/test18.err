@@ -1,0 +1,378 @@
+Pointer Analysis Results:
+  %2      : { @(%a = alloca i32, align 4); @(%b = alloca i32, align 4); }
+  %a      : { @(%a = alloca i32, align 4); }
+  %b      : { @(%b = alloca i32, align 4); }
+  %in     : { @(%in = alloca i32, align 4); }
+  %retval : { @(%retval = alloca i32, align 4); }
+  %s      : { @(%s = alloca i32, align 4); }
+  %x      : { @(%x = alloca i32*, align 8); }
+  @(%x = alloca i32*, align 8): { @(%a = alloca i32, align 4); @(%b = alloca i32, align 4); }
+
+Dataflow Analysis Results:
+Instruction:   %retval = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %in = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %a = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %b = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %x = alloca i32*, align 8
+In set: 
+
+Out set: 
+
+
+Instruction:   %s = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   store i32 0, i32* %retval, align 4
+In set: 
+
+Out set: 
+    [ %retval  |-> Zero      ]
+
+Instruction:   %call = call i32 @getchar()
+In set: 
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %call    |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   store i32 %call, i32* %in, align 4
+In set: 
+    [ %call    |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %call    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   store i32 0, i32* %a, align 4
+In set: 
+    [ %call    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %2       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %call    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   store i32 1, i32* %b, align 4
+In set: 
+    [ %2       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %call    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %0 = load i32, i32* %in, align 4
+In set: 
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %cmp = icmp slt i32 %0, 10
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   br i1 %cmp, label %if.then, label %if.else
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   store i32* %a, i32** %x, align 8
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   br label %if.end
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   store i32* %b, i32** %x, align 8
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   br label %if.end
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %1 = load i32, i32* %b, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %2 = load i32*, i32** %x, align 8
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %3 = load i32, i32* %2, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %div = sdiv i32 %1, %3
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   store i32 %div, i32* %s, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+    [ %s       |-> Uninit    ]
+
+Instruction:   ret i32 0
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+    [ %s       |-> Uninit    ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %in      |-> MaybeZero ]
+    [ %retval  |-> Zero      ]
+    [ %s       |-> Uninit    ]
+

@@ -1,0 +1,671 @@
+Pointer Analysis Results:
+  %a      : { @(%a = alloca i32, align 4); }
+  %b      : { @(%b = alloca i32, align 4); }
+  %in     : { @(%in = alloca i32, align 4); }
+  %out    : { @(%out = alloca i32, align 4); }
+
+get store value operand:   %call = call i32 @getchar()
+get store value operand: i32 10
+get store value operand: i32 2
+Load type is integer
+  %in = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+Load type is integer
+  %b = alloca i32, align 4
+Load in InMem
+Load Domain: NonZero  
+get store value operand:   %add = add nsw i32 100, %1
+Load type is integer
+  %in = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+get store value operand: i32 1
+Load type is integer
+  %a = alloca i32, align 4
+Load in InMem
+Load Domain: NonZero  
+Load type is integer
+  %b = alloca i32, align 4
+Load in InMem
+Load Domain: NonZero  
+get store value operand:   %add4 = add nsw i32 %3, %4
+Load type is integer
+  %a = alloca i32, align 4
+Load in InMem
+Load Domain: NonZero  
+Load type is integer
+  %b = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+get store value operand:   %div = sdiv i32 %5, %6
+get store value operand:   %call = call i32 @getchar()
+get store value operand: i32 10
+get store value operand: i32 2
+Load type is integer
+  %in = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+Load type is integer
+  %b = alloca i32, align 4
+Load in InMem
+Load Domain: NonZero  
+get store value operand:   %add = add nsw i32 100, %1
+Load type is integer
+  %in = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+get store value operand: i32 1
+Load type is integer
+  %a = alloca i32, align 4
+Load in InMem
+Load Domain: NonZero  
+Load type is integer
+  %b = alloca i32, align 4
+Load in InMem
+Load Domain: NonZero  
+get store value operand:   %add4 = add nsw i32 %3, %4
+Load type is integer
+  %a = alloca i32, align 4
+Load in InMem
+Load Domain: NonZero  
+Load type is integer
+  %b = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+get store value operand:   %div = sdiv i32 %5, %6
+Dataflow Analysis Results:
+Instruction:   %in = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %a = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %b = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %out = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %call = call i32 @getchar()
+In set: 
+
+Out set: 
+    [ %call    |-> MaybeZero ]
+
+Instruction:   store i32 %call, i32* %in, align 4
+In set: 
+    [ %call    |-> MaybeZero ]
+Out set: 
+    [ %call    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+
+Instruction:   store i32 10, i32* %a, align 4
+In set: 
+    [ %call    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+Out set: 
+    [ %a       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+
+Instruction:   store i32 2, i32* %b, align 4
+In set: 
+    [ %a       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+Out set: 
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+
+Instruction:   %0 = load i32, i32* %in, align 4
+In set: 
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+
+Instruction:   %cmp = icmp sgt i32 %0, 0
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+
+Instruction:   br i1 %cmp, label %if.then, label %if.else
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+
+Instruction:   %1 = load i32, i32* %b, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+
+Instruction:   %add = add nsw i32 100, %1
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+    [ %add     |-> MaybeZero ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+
+Instruction:   store i32 %add, i32* %b, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+    [ %add     |-> MaybeZero ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+    [ %add     |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+
+Instruction:   br label %if.end5
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+    [ %add     |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+    [ %add     |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+
+Instruction:   %2 = load i32, i32* %in, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+
+Instruction:   %cmp1 = icmp eq i32 %2, 0
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+
+Instruction:   br i1 %cmp1, label %if.then2, label %if.else3
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+
+Instruction:   store i32 1, i32* %b, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+
+Instruction:   br label %if.end
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+
+Instruction:   %3 = load i32, i32* %a, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+
+Instruction:   %4 = load i32, i32* %b, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+
+Instruction:   %add4 = add nsw i32 %3, %4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+    [ %add4    |-> MaybeZero ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+
+Instruction:   store i32 %add4, i32* %b, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+    [ %add4    |-> MaybeZero ]
+    [ %b       |-> NonZero   ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+    [ %add4    |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+
+Instruction:   br label %if.end
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+    [ %add4    |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+    [ %add4    |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+
+Instruction:   br label %if.end5
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+    [ %add4    |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+    [ %add4    |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+
+Instruction:   %5 = load i32, i32* %a, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+    [ %add     |-> MaybeZero ]
+    [ %add4    |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> NonZero   ]
+    [ %5       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+    [ %add     |-> MaybeZero ]
+    [ %add4    |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+
+Instruction:   %6 = load i32, i32* %b, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> NonZero   ]
+    [ %5       |-> NonZero   ]
+    [ %a       |-> NonZero   ]
+    [ %add     |-> MaybeZero ]
+    [ %add4    |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> NonZero   ]
+    [ %5       |-> NonZero   ]
+    [ %6       |-> MaybeZero ]
+    [ %a       |-> NonZero   ]
+    [ %add     |-> MaybeZero ]
+    [ %add4    |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+
+Instruction:   %div = sdiv i32 %5, %6
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> NonZero   ]
+    [ %5       |-> NonZero   ]
+    [ %6       |-> MaybeZero ]
+    [ %a       |-> NonZero   ]
+    [ %add     |-> MaybeZero ]
+    [ %add4    |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %in      |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> NonZero   ]
+    [ %5       |-> NonZero   ]
+    [ %6       |-> MaybeZero ]
+    [ %a       |-> NonZero   ]
+    [ %add     |-> MaybeZero ]
+    [ %add4    |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %in      |-> MaybeZero ]
+
+Instruction:   store i32 %div, i32* %out, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> NonZero   ]
+    [ %5       |-> NonZero   ]
+    [ %6       |-> MaybeZero ]
+    [ %a       |-> NonZero   ]
+    [ %add     |-> MaybeZero ]
+    [ %add4    |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %in      |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> NonZero   ]
+    [ %5       |-> NonZero   ]
+    [ %6       |-> MaybeZero ]
+    [ %a       |-> NonZero   ]
+    [ %add     |-> MaybeZero ]
+    [ %add4    |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %in      |-> MaybeZero ]
+    [ %out     |-> Uninit    ]
+
+Instruction:   ret void
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> NonZero   ]
+    [ %5       |-> NonZero   ]
+    [ %6       |-> MaybeZero ]
+    [ %a       |-> NonZero   ]
+    [ %add     |-> MaybeZero ]
+    [ %add4    |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %in      |-> MaybeZero ]
+    [ %out     |-> Uninit    ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> NonZero   ]
+    [ %5       |-> NonZero   ]
+    [ %6       |-> MaybeZero ]
+    [ %a       |-> NonZero   ]
+    [ %add     |-> MaybeZero ]
+    [ %add4    |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %call    |-> MaybeZero ]
+    [ %cmp     |-> MaybeZero ]
+    [ %cmp1    |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %in      |-> MaybeZero ]
+    [ %out     |-> Uninit    ]
+

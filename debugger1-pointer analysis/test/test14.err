@@ -1,0 +1,184 @@
+Pointer Analysis Results:
+  %0      : { @(%a = alloca i32, align 4); }
+  %1      : { @(%a = alloca i32, align 4); }
+  %a      : { @(%a = alloca i32, align 4); }
+  %c      : { @(%c = alloca i32*, align 8); }
+  %d      : { @(%d = alloca i32*, align 8); }
+  %e      : { @(%e = alloca i32*, align 8); }
+  %x      : { @(%x = alloca i32, align 4); }
+  @(%c = alloca i32*, align 8): { @(%a = alloca i32, align 4); }
+  @(%d = alloca i32*, align 8): { @(%a = alloca i32, align 4); }
+  @(%e = alloca i32*, align 8): { @(%a = alloca i32, align 4); }
+
+get store value operand: i32 0
+ptr1: %0      
+ptr2: %a      
+Store get Value Operand domain: 
+Zero     
+Store get p Value Operand domain: 
+Uninit   
+Store get joined domain: 
+Zero     
+ptr1: %0      
+ptr2: %1      
+Store get Value Operand domain: 
+Zero     
+Store get p Value Operand domain: 
+Uninit   
+Store get joined domain: 
+Zero     
+Load type is integer
+  %1 = load i32*, i32** %d, align 8
+Load in InMem
+Load Domain: Zero     
+get store value operand:   %div = sdiv i32 1, %2
+get store value operand: i32 0
+ptr1: %0      
+ptr2: %a      
+Store get Value Operand domain: 
+Zero     
+Store get p Value Operand domain: 
+Uninit   
+Store get joined domain: 
+Zero     
+ptr1: %0      
+ptr2: %1      
+Store get Value Operand domain: 
+Zero     
+Store get p Value Operand domain: 
+Uninit   
+Store get joined domain: 
+Zero     
+Load type is integer
+  %1 = load i32*, i32** %d, align 8
+Load in InMem
+Load Domain: Zero     
+get store value operand:   %div = sdiv i32 1, %2
+Dataflow Analysis Results:
+Instruction:   %a = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %c = alloca i32*, align 8
+In set: 
+
+Out set: 
+
+
+Instruction:   %d = alloca i32*, align 8
+In set: 
+
+Out set: 
+
+
+Instruction:   %e = alloca i32*, align 8
+In set: 
+
+Out set: 
+
+
+Instruction:   %x = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   store i32* %a, i32** %c, align 8
+In set: 
+
+Out set: 
+
+
+Instruction:   store i32* %a, i32** %d, align 8
+In set: 
+
+Out set: 
+
+
+Instruction:   store i32* %a, i32** %e, align 8
+In set: 
+
+Out set: 
+
+
+Instruction:   %0 = load i32*, i32** %c, align 8
+In set: 
+
+Out set: 
+
+
+Instruction:   store i32 0, i32* %0, align 4
+In set: 
+
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %a       |-> Zero      ]
+
+Instruction:   %1 = load i32*, i32** %d, align 8
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %a       |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %a       |-> Zero      ]
+
+Instruction:   %2 = load i32, i32* %1, align 4
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %a       |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %2       |-> Zero      ]
+    [ %a       |-> Zero      ]
+
+Instruction:   %div = sdiv i32 1, %2
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %2       |-> Zero      ]
+    [ %a       |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %2       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %div     |-> Uninit    ]
+
+Instruction:   store i32 %div, i32* %x, align 4
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %2       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %div     |-> Uninit    ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %2       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %div     |-> Uninit    ]
+    [ %x       |-> Uninit    ]
+
+Instruction:   ret i32 0
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %2       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %div     |-> Uninit    ]
+    [ %x       |-> Uninit    ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %2       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %div     |-> Uninit    ]
+    [ %x       |-> Uninit    ]
+

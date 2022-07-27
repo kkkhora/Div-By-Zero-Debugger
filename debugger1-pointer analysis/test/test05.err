@@ -1,0 +1,203 @@
+Pointer Analysis Results:
+  %x      : { @(%x = alloca i32, align 4); }
+  %y      : { @(%y = alloca i32, align 4); }
+  %z      : { @(%z = alloca i32, align 4); }
+
+get store value operand: i32 0
+get store value operand: i32 1
+Load type is integer
+  %x = alloca i32, align 4
+Load in InMem
+Load Domain: Zero     
+Load type is integer
+  %y = alloca i32, align 4
+Load in InMem
+Load Domain: NonZero  
+Load type is integer
+  %x = alloca i32, align 4
+Load in InMem
+Load Domain: Zero     
+get store value operand:   %div = sdiv i32 %1, %2
+get store value operand: i32 0
+get store value operand: i32 1
+Load type is integer
+  %x = alloca i32, align 4
+Load in InMem
+Load Domain: Zero     
+Load type is integer
+  %y = alloca i32, align 4
+Load in InMem
+Load Domain: NonZero  
+Load type is integer
+  %x = alloca i32, align 4
+Load in InMem
+Load Domain: Zero     
+get store value operand:   %div = sdiv i32 %1, %2
+Dataflow Analysis Results:
+Instruction:   %x = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %y = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %z = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   store i32 0, i32* %x, align 4
+In set: 
+
+Out set: 
+    [ %x       |-> Zero      ]
+
+Instruction:   store i32 1, i32* %y, align 4
+In set: 
+    [ %x       |-> Zero      ]
+Out set: 
+    [ %x       |-> Zero      ]
+    [ %y       |-> NonZero   ]
+
+Instruction:   %0 = load i32, i32* %x, align 4
+In set: 
+    [ %x       |-> Zero      ]
+    [ %y       |-> NonZero   ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %x       |-> Zero      ]
+    [ %y       |-> NonZero   ]
+
+Instruction:   %cmp = icmp ne i32 %0, 0
+In set: 
+    [ %0       |-> Zero      ]
+    [ %x       |-> Zero      ]
+    [ %y       |-> NonZero   ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %cmp     |-> Zero      ]
+    [ %x       |-> Zero      ]
+    [ %y       |-> NonZero   ]
+
+Instruction:   br i1 %cmp, label %if.then, label %if.end
+In set: 
+    [ %0       |-> Zero      ]
+    [ %cmp     |-> Zero      ]
+    [ %x       |-> Zero      ]
+    [ %y       |-> NonZero   ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %cmp     |-> Zero      ]
+    [ %x       |-> Zero      ]
+    [ %y       |-> NonZero   ]
+
+Instruction:   %1 = load i32, i32* %y, align 4
+In set: 
+    [ %0       |-> Zero      ]
+    [ %cmp     |-> Zero      ]
+    [ %x       |-> Zero      ]
+    [ %y       |-> NonZero   ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %cmp     |-> Zero      ]
+    [ %x       |-> Zero      ]
+    [ %y       |-> NonZero   ]
+
+Instruction:   %2 = load i32, i32* %x, align 4
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %cmp     |-> Zero      ]
+    [ %x       |-> Zero      ]
+    [ %y       |-> NonZero   ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %cmp     |-> Zero      ]
+    [ %x       |-> Zero      ]
+    [ %y       |-> NonZero   ]
+
+Instruction:   %div = sdiv i32 %1, %2
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %cmp     |-> Zero      ]
+    [ %x       |-> Zero      ]
+    [ %y       |-> NonZero   ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %cmp     |-> Zero      ]
+    [ %div     |-> Uninit    ]
+    [ %x       |-> Zero      ]
+    [ %y       |-> NonZero   ]
+
+Instruction:   store i32 %div, i32* %z, align 4
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %cmp     |-> Zero      ]
+    [ %div     |-> Uninit    ]
+    [ %x       |-> Zero      ]
+    [ %y       |-> NonZero   ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %cmp     |-> Zero      ]
+    [ %div     |-> Uninit    ]
+    [ %x       |-> Zero      ]
+    [ %y       |-> NonZero   ]
+    [ %z       |-> Uninit    ]
+
+Instruction:   br label %if.end
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %cmp     |-> Zero      ]
+    [ %div     |-> Uninit    ]
+    [ %x       |-> Zero      ]
+    [ %y       |-> NonZero   ]
+    [ %z       |-> Uninit    ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %cmp     |-> Zero      ]
+    [ %div     |-> Uninit    ]
+    [ %x       |-> Zero      ]
+    [ %y       |-> NonZero   ]
+    [ %z       |-> Uninit    ]
+
+Instruction:   ret i32 0
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %cmp     |-> Zero      ]
+    [ %div     |-> Uninit    ]
+    [ %x       |-> Zero      ]
+    [ %y       |-> NonZero   ]
+    [ %z       |-> Uninit    ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %cmp     |-> Zero      ]
+    [ %div     |-> Uninit    ]
+    [ %x       |-> Zero      ]
+    [ %y       |-> NonZero   ]
+    [ %z       |-> Uninit    ]
+

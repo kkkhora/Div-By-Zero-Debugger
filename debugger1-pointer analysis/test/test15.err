@@ -1,0 +1,353 @@
+Pointer Analysis Results:
+  %1      : { @(%a = alloca i32, align 4); @(%b = alloca i32, align 4); }
+  %a      : { @(%a = alloca i32, align 4); }
+  %arg.addr: { @(%arg.addr = alloca i32, align 4); }
+  %b      : { @(%b = alloca i32, align 4); }
+  %x      : { @(%x = alloca i32*, align 8); }
+  %z      : { @(%z = alloca i32, align 4); }
+  @(%x = alloca i32*, align 8): { @(%a = alloca i32, align 4); @(%b = alloca i32, align 4); }
+
+get store value operand: i32 %arg
+get store value operand: i32 0
+ptr1: %a      
+ptr2: %1      
+Store get Value Operand domain: 
+Zero     
+Store get p Value Operand domain: 
+Uninit   
+Store get joined domain: 
+Zero     
+get store value operand: i32 1
+ptr1: %b      
+ptr2: %1      
+Store get Value Operand domain: 
+NonZero  
+Store get p Value Operand domain: 
+Zero     
+Store get joined domain: 
+MaybeZero
+Load type is integer
+  %arg.addr = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+Load type is integer
+  %1 = load i32*, i32** %x, align 8
+Load in InMem
+Load Domain: MaybeZero
+get store value operand:   %div = sdiv i32 1, %2
+get store value operand: i32 %arg
+get store value operand: i32 0
+ptr1: %a      
+ptr2: %1      
+Store get Value Operand domain: 
+Zero     
+Store get p Value Operand domain: 
+Uninit   
+Store get joined domain: 
+Zero     
+get store value operand: i32 1
+ptr1: %b      
+ptr2: %1      
+Store get Value Operand domain: 
+NonZero  
+Store get p Value Operand domain: 
+Zero     
+Store get joined domain: 
+MaybeZero
+Load type is integer
+  %arg.addr = alloca i32, align 4
+Load in InMem
+Load Domain: MaybeZero
+Load type is integer
+  %1 = load i32*, i32** %x, align 8
+Load in InMem
+Load Domain: MaybeZero
+get store value operand:   %div = sdiv i32 1, %2
+Dataflow Analysis Results:
+Instruction:   %arg.addr = alloca i32, align 4
+In set: 
+    [ i32 %arg |-> MaybeZero ]
+Out set: 
+    [ i32 %arg |-> MaybeZero ]
+
+Instruction:   %a = alloca i32, align 4
+In set: 
+    [ i32 %arg |-> MaybeZero ]
+Out set: 
+    [ i32 %arg |-> MaybeZero ]
+
+Instruction:   %b = alloca i32, align 4
+In set: 
+    [ i32 %arg |-> MaybeZero ]
+Out set: 
+    [ i32 %arg |-> MaybeZero ]
+
+Instruction:   %x = alloca i32*, align 8
+In set: 
+    [ i32 %arg |-> MaybeZero ]
+Out set: 
+    [ i32 %arg |-> MaybeZero ]
+
+Instruction:   %z = alloca i32, align 4
+In set: 
+    [ i32 %arg |-> MaybeZero ]
+Out set: 
+    [ i32 %arg |-> MaybeZero ]
+
+Instruction:   store i32 %arg, i32* %arg.addr, align 4
+In set: 
+    [ i32 %arg |-> MaybeZero ]
+Out set: 
+    [ %arg.addr |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+
+Instruction:   store i32 0, i32* %a, align 4
+In set: 
+    [ %arg.addr |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+Out set: 
+    [ %1       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+
+Instruction:   store i32 1, i32* %b, align 4
+In set: 
+    [ %1       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+Out set: 
+    [ %1       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+
+Instruction:   %0 = load i32, i32* %arg.addr, align 4
+In set: 
+    [ %1       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+
+Instruction:   %tobool = icmp ne i32 %0, 0
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %tobool  |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+
+Instruction:   br i1 %tobool, label %if.then, label %if.else
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %tobool  |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %tobool  |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+
+Instruction:   store i32* %a, i32** %x, align 8
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %tobool  |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %tobool  |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+
+Instruction:   br label %if.end
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %tobool  |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %tobool  |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+
+Instruction:   store i32* %b, i32** %x, align 8
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %tobool  |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %tobool  |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+
+Instruction:   br label %if.end
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %tobool  |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %tobool  |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+
+Instruction:   %1 = load i32*, i32** %x, align 8
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %tobool  |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %tobool  |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+
+Instruction:   %2 = load i32, i32* %1, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %tobool  |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %tobool  |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+
+Instruction:   %div = sdiv i32 1, %2
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %tobool  |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %tobool  |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+
+Instruction:   store i32 %div, i32* %z, align 4
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %tobool  |-> MaybeZero ]
+    [ i32 %arg |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %tobool  |-> MaybeZero ]
+    [ %z       |-> Uninit    ]
+    [ i32 %arg |-> MaybeZero ]
+
+Instruction:   ret i32 0
+In set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %tobool  |-> MaybeZero ]
+    [ %z       |-> Uninit    ]
+    [ i32 %arg |-> MaybeZero ]
+Out set: 
+    [ %0       |-> MaybeZero ]
+    [ %1       |-> MaybeZero ]
+    [ %2       |-> MaybeZero ]
+    [ %a       |-> Zero      ]
+    [ %arg.addr |-> MaybeZero ]
+    [ %b       |-> MaybeZero ]
+    [ %div     |-> Uninit    ]
+    [ %tobool  |-> MaybeZero ]
+    [ %z       |-> Uninit    ]
+    [ i32 %arg |-> MaybeZero ]
+

@@ -1,0 +1,428 @@
+Pointer Analysis Results:
+  %0      : { @(%b = alloca i32, align 4); }
+  %2      : { @(%a = alloca i32, align 4); }
+  %4      : { @(%a = alloca i32, align 4); }
+  %a      : { @(%a = alloca i32, align 4); }
+  %b      : { @(%b = alloca i32, align 4); }
+  %p      : { @(%p = alloca i32*, align 8); }
+  %q      : { @(%q = alloca i32*, align 8); }
+  %retval : { @(%retval = alloca i32, align 4); }
+  %s      : { @(%s = alloca i32, align 4); }
+  @(%p = alloca i32*, align 8): { @(%a = alloca i32, align 4); }
+  @(%q = alloca i32*, align 8): { @(%b = alloca i32, align 4); }
+
+get store value operand: i32 0
+get store value operand: i32 0
+ptr1: %a      
+ptr2: %2      
+Store get Value Operand domain: 
+Zero     
+Store get p Value Operand domain: 
+Uninit   
+Store get joined domain: 
+Zero     
+ptr1: %a      
+ptr2: %4      
+Store get Value Operand domain: 
+Zero     
+Store get p Value Operand domain: 
+Uninit   
+Store get joined domain: 
+Zero     
+get store value operand: i32 1
+ptr1: %b      
+ptr2: %0      
+Store get Value Operand domain: 
+NonZero  
+Store get p Value Operand domain: 
+Uninit   
+Store get joined domain: 
+NonZero  
+Load type is integer
+  %0 = load i32*, i32** %q, align 8
+Load in InMem
+Load Domain: NonZero  
+get store value operand:   %1 = load i32, i32* %0, align 4
+ptr1: %2      
+ptr2: %a      
+Store get Value Operand domain: 
+NonZero  
+Store get p Value Operand domain: 
+Zero     
+Store get joined domain: 
+MaybeZero
+ptr1: %2      
+ptr2: %4      
+Store get Value Operand domain: 
+NonZero  
+Store get p Value Operand domain: 
+Zero     
+Store get joined domain: 
+MaybeZero
+Load type is integer
+  %b = alloca i32, align 4
+Load in InMem
+Load Domain: NonZero  
+Load type is integer
+  %4 = load i32*, i32** %p, align 8
+Load in InMem
+Load Domain: MaybeZero
+get store value operand:   %div = sdiv i32 %3, %5
+get store value operand: i32 0
+get store value operand: i32 0
+ptr1: %a      
+ptr2: %2      
+Store get Value Operand domain: 
+Zero     
+Store get p Value Operand domain: 
+Uninit   
+Store get joined domain: 
+Zero     
+ptr1: %a      
+ptr2: %4      
+Store get Value Operand domain: 
+Zero     
+Store get p Value Operand domain: 
+Uninit   
+Store get joined domain: 
+Zero     
+get store value operand: i32 1
+ptr1: %b      
+ptr2: %0      
+Store get Value Operand domain: 
+NonZero  
+Store get p Value Operand domain: 
+Uninit   
+Store get joined domain: 
+NonZero  
+Load type is integer
+  %0 = load i32*, i32** %q, align 8
+Load in InMem
+Load Domain: NonZero  
+get store value operand:   %1 = load i32, i32* %0, align 4
+ptr1: %2      
+ptr2: %a      
+Store get Value Operand domain: 
+NonZero  
+Store get p Value Operand domain: 
+Zero     
+Store get joined domain: 
+MaybeZero
+ptr1: %2      
+ptr2: %4      
+Store get Value Operand domain: 
+NonZero  
+Store get p Value Operand domain: 
+Zero     
+Store get joined domain: 
+MaybeZero
+Load type is integer
+  %b = alloca i32, align 4
+Load in InMem
+Load Domain: NonZero  
+Load type is integer
+  %4 = load i32*, i32** %p, align 8
+Load in InMem
+Load Domain: MaybeZero
+get store value operand:   %div = sdiv i32 %3, %5
+Dataflow Analysis Results:
+Instruction:   %retval = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %a = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %b = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %p = alloca i32*, align 8
+In set: 
+
+Out set: 
+
+
+Instruction:   %q = alloca i32*, align 8
+In set: 
+
+Out set: 
+
+
+Instruction:   %s = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   store i32 0, i32* %retval, align 4
+In set: 
+
+Out set: 
+    [ %retval  |-> Zero      ]
+
+Instruction:   store i32 0, i32* %a, align 4
+In set: 
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %2       |-> Zero      ]
+    [ %4       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   store i32 1, i32* %b, align 4
+In set: 
+    [ %2       |-> Zero      ]
+    [ %4       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %4       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   store i32* %a, i32** %p, align 8
+In set: 
+    [ %0       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %4       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %4       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   store i32* %b, i32** %q, align 8
+In set: 
+    [ %0       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %4       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %4       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %0 = load i32*, i32** %q, align 8
+In set: 
+    [ %0       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %4       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %4       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %1 = load i32, i32* %0, align 4
+In set: 
+    [ %0       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %4       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %4       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %2 = load i32*, i32** %p, align 8
+In set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %4       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %4       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   store i32 %1, i32* %2, align 4
+In set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %4       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> MaybeZero ]
+    [ %4       |-> MaybeZero ]
+    [ %a       |-> MaybeZero ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %3 = load i32, i32* %b, align 4
+In set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> MaybeZero ]
+    [ %4       |-> MaybeZero ]
+    [ %a       |-> MaybeZero ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> MaybeZero ]
+    [ %a       |-> MaybeZero ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %4 = load i32*, i32** %p, align 8
+In set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> MaybeZero ]
+    [ %a       |-> MaybeZero ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> MaybeZero ]
+    [ %a       |-> MaybeZero ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %5 = load i32, i32* %4, align 4
+In set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> MaybeZero ]
+    [ %a       |-> MaybeZero ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> MaybeZero ]
+    [ %5       |-> MaybeZero ]
+    [ %a       |-> MaybeZero ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %div = sdiv i32 %3, %5
+In set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> MaybeZero ]
+    [ %5       |-> MaybeZero ]
+    [ %a       |-> MaybeZero ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> MaybeZero ]
+    [ %5       |-> MaybeZero ]
+    [ %a       |-> MaybeZero ]
+    [ %b       |-> NonZero   ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   store i32 %div, i32* %s, align 4
+In set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> MaybeZero ]
+    [ %5       |-> MaybeZero ]
+    [ %a       |-> MaybeZero ]
+    [ %b       |-> NonZero   ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> MaybeZero ]
+    [ %5       |-> MaybeZero ]
+    [ %a       |-> MaybeZero ]
+    [ %b       |-> NonZero   ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+    [ %s       |-> Uninit    ]
+
+Instruction:   ret i32 0
+In set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> MaybeZero ]
+    [ %5       |-> MaybeZero ]
+    [ %a       |-> MaybeZero ]
+    [ %b       |-> NonZero   ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+    [ %s       |-> Uninit    ]
+Out set: 
+    [ %0       |-> NonZero   ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> MaybeZero ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> MaybeZero ]
+    [ %5       |-> MaybeZero ]
+    [ %a       |-> MaybeZero ]
+    [ %b       |-> NonZero   ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+    [ %s       |-> Uninit    ]
+

@@ -1,0 +1,355 @@
+Pointer Analysis Results:
+  %a      : { @(%a = alloca i32, align 4); }
+  %a1     : { @(%a1 = alloca i32, align 4); }
+  %b      : { @(%b = alloca i32, align 4); }
+  %c      : { @(%c = alloca i32, align 4); }
+  %d      : { @(%d = alloca i32, align 4); }
+  %retval : { @(%retval = alloca i32, align 4); }
+
+Dataflow Analysis Results:
+Instruction:   %retval = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %a = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %b = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %c = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %d = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %a1 = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   store i32 0, i32* %retval, align 4
+In set: 
+
+Out set: 
+    [ %retval  |-> Zero      ]
+
+Instruction:   store i32 0, i32* %a, align 4
+In set: 
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %a       |-> Zero      ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   store i32 1, i32* %b, align 4
+In set: 
+    [ %a       |-> Zero      ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %a       |-> Zero      ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %0 = load i32, i32* %a, align 4
+In set: 
+    [ %a       |-> Zero      ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %add = add nsw i32 %0, 1
+In set: 
+    [ %0       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %add     |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   store i32 %add, i32* %c, align 4
+In set: 
+    [ %0       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %add     |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %add     |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %c       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %1 = load i32, i32* %b, align 4
+In set: 
+    [ %0       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %add     |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %c       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %a       |-> Zero      ]
+    [ %add     |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %c       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %2 = load i32, i32* %a, align 4
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %a       |-> Zero      ]
+    [ %add     |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %c       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %add     |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %c       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %div = sdiv i32 %1, %2
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %add     |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %c       |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %add     |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %c       |-> NonZero   ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   store i32 %div, i32* %d, align 4
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %add     |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %c       |-> NonZero   ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %add     |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %c       |-> NonZero   ]
+    [ %d       |-> Uninit    ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %3 = load i32, i32* %c, align 4
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %add     |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %c       |-> NonZero   ]
+    [ %d       |-> Uninit    ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %a       |-> Zero      ]
+    [ %add     |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %c       |-> NonZero   ]
+    [ %d       |-> Uninit    ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %tobool = icmp ne i32 %3, 0
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %a       |-> Zero      ]
+    [ %add     |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %c       |-> NonZero   ]
+    [ %d       |-> Uninit    ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %a       |-> Zero      ]
+    [ %add     |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %c       |-> NonZero   ]
+    [ %d       |-> Uninit    ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+    [ %tobool  |-> NonZero   ]
+
+Instruction:   br i1 %tobool, label %if.then, label %if.end
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %a       |-> Zero      ]
+    [ %add     |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %c       |-> NonZero   ]
+    [ %d       |-> Uninit    ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+    [ %tobool  |-> NonZero   ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %a       |-> Zero      ]
+    [ %add     |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %c       |-> NonZero   ]
+    [ %d       |-> Uninit    ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+    [ %tobool  |-> NonZero   ]
+
+Instruction:   store i32 1, i32* %a1, align 4
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %a       |-> Zero      ]
+    [ %add     |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %c       |-> NonZero   ]
+    [ %d       |-> Uninit    ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+    [ %tobool  |-> NonZero   ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %a       |-> Zero      ]
+    [ %a1      |-> NonZero   ]
+    [ %add     |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %c       |-> NonZero   ]
+    [ %d       |-> Uninit    ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+    [ %tobool  |-> NonZero   ]
+
+Instruction:   br label %if.end
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %a       |-> Zero      ]
+    [ %a1      |-> NonZero   ]
+    [ %add     |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %c       |-> NonZero   ]
+    [ %d       |-> Uninit    ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+    [ %tobool  |-> NonZero   ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %a       |-> Zero      ]
+    [ %a1      |-> NonZero   ]
+    [ %add     |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %c       |-> NonZero   ]
+    [ %d       |-> Uninit    ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+    [ %tobool  |-> NonZero   ]
+
+Instruction:   ret i32 0
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %a       |-> Zero      ]
+    [ %a1      |-> NonZero   ]
+    [ %add     |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %c       |-> NonZero   ]
+    [ %d       |-> Uninit    ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+    [ %tobool  |-> NonZero   ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> NonZero   ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %a       |-> Zero      ]
+    [ %a1      |-> NonZero   ]
+    [ %add     |-> NonZero   ]
+    [ %b       |-> NonZero   ]
+    [ %c       |-> NonZero   ]
+    [ %d       |-> Uninit    ]
+    [ %div     |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+    [ %tobool  |-> NonZero   ]
+

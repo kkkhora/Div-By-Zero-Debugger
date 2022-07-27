@@ -1,0 +1,462 @@
+Pointer Analysis Results:
+  %a      : { @(%a = alloca i32, align 4); }
+  %b      : { @(%b = alloca i32, align 4); }
+  %c      : { @(%c = alloca i32, align 4); }
+  %d      : { @(%d = alloca i32, align 4); }
+  %e      : { @(%e = alloca i32, align 4); }
+  %retval : { @(%retval = alloca i32, align 4); }
+
+get store value operand: i32 0
+get store value operand: i32 0
+get store value operand: i32 0
+Load type is integer
+  %a = alloca i32, align 4
+Load in InMem
+Load Domain: Zero     
+Load type is integer
+  %b = alloca i32, align 4
+Load in InMem
+Load Domain: Zero     
+get store value operand:   %conv = zext i1 %cmp to i32
+Load type is integer
+  %b = alloca i32, align 4
+Load in InMem
+Load Domain: Zero     
+Load type is integer
+  %c = alloca i32, align 4
+Load in InMem
+Load Domain: NonZero  
+get store value operand:   %div = sdiv i32 %2, %3
+Load type is integer
+  %d = alloca i32, align 4
+Load in InMem
+Load Domain: Zero     
+Load type is integer
+  %d = alloca i32, align 4
+Load in InMem
+Load Domain: Zero     
+get store value operand:   %div1 = sdiv i32 %4, %5
+get store value operand: i32 0
+get store value operand: i32 0
+get store value operand: i32 0
+Load type is integer
+  %a = alloca i32, align 4
+Load in InMem
+Load Domain: Zero     
+Load type is integer
+  %b = alloca i32, align 4
+Load in InMem
+Load Domain: Zero     
+get store value operand:   %conv = zext i1 %cmp to i32
+Load type is integer
+  %b = alloca i32, align 4
+Load in InMem
+Load Domain: Zero     
+Load type is integer
+  %c = alloca i32, align 4
+Load in InMem
+Load Domain: NonZero  
+get store value operand:   %div = sdiv i32 %2, %3
+Load type is integer
+  %d = alloca i32, align 4
+Load in InMem
+Load Domain: Zero     
+Load type is integer
+  %d = alloca i32, align 4
+Load in InMem
+Load Domain: Zero     
+get store value operand:   %div1 = sdiv i32 %4, %5
+Dataflow Analysis Results:
+Instruction:   %retval = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %a = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %b = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %c = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %d = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   %e = alloca i32, align 4
+In set: 
+
+Out set: 
+
+
+Instruction:   store i32 0, i32* %retval, align 4
+In set: 
+
+Out set: 
+    [ %retval  |-> Zero      ]
+
+Instruction:   store i32 0, i32* %a, align 4
+In set: 
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %a       |-> Zero      ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   store i32 0, i32* %b, align 4
+In set: 
+    [ %a       |-> Zero      ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %0 = load i32, i32* %a, align 4
+In set: 
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %1 = load i32, i32* %b, align 4
+In set: 
+    [ %0       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %cmp = icmp eq i32 %0, %1
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %cmp     |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %conv = zext i1 %cmp to i32
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %cmp     |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %cmp     |-> NonZero   ]
+    [ %conv    |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   store i32 %conv, i32* %c, align 4
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %cmp     |-> NonZero   ]
+    [ %conv    |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %c       |-> NonZero   ]
+    [ %cmp     |-> NonZero   ]
+    [ %conv    |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %2 = load i32, i32* %b, align 4
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %c       |-> NonZero   ]
+    [ %cmp     |-> NonZero   ]
+    [ %conv    |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %2       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %c       |-> NonZero   ]
+    [ %cmp     |-> NonZero   ]
+    [ %conv    |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %3 = load i32, i32* %c, align 4
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %2       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %c       |-> NonZero   ]
+    [ %cmp     |-> NonZero   ]
+    [ %conv    |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %c       |-> NonZero   ]
+    [ %cmp     |-> NonZero   ]
+    [ %conv    |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %div = sdiv i32 %2, %3
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %c       |-> NonZero   ]
+    [ %cmp     |-> NonZero   ]
+    [ %conv    |-> NonZero   ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %c       |-> NonZero   ]
+    [ %cmp     |-> NonZero   ]
+    [ %conv    |-> NonZero   ]
+    [ %div     |-> Zero      ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   store i32 %div, i32* %d, align 4
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %c       |-> NonZero   ]
+    [ %cmp     |-> NonZero   ]
+    [ %conv    |-> NonZero   ]
+    [ %div     |-> Zero      ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %c       |-> NonZero   ]
+    [ %cmp     |-> NonZero   ]
+    [ %conv    |-> NonZero   ]
+    [ %d       |-> Zero      ]
+    [ %div     |-> Zero      ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %4 = load i32, i32* %d, align 4
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %c       |-> NonZero   ]
+    [ %cmp     |-> NonZero   ]
+    [ %conv    |-> NonZero   ]
+    [ %d       |-> Zero      ]
+    [ %div     |-> Zero      ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %c       |-> NonZero   ]
+    [ %cmp     |-> NonZero   ]
+    [ %conv    |-> NonZero   ]
+    [ %d       |-> Zero      ]
+    [ %div     |-> Zero      ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %5 = load i32, i32* %d, align 4
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %c       |-> NonZero   ]
+    [ %cmp     |-> NonZero   ]
+    [ %conv    |-> NonZero   ]
+    [ %d       |-> Zero      ]
+    [ %div     |-> Zero      ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> Zero      ]
+    [ %5       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %c       |-> NonZero   ]
+    [ %cmp     |-> NonZero   ]
+    [ %conv    |-> NonZero   ]
+    [ %d       |-> Zero      ]
+    [ %div     |-> Zero      ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   %div1 = sdiv i32 %4, %5
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> Zero      ]
+    [ %5       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %c       |-> NonZero   ]
+    [ %cmp     |-> NonZero   ]
+    [ %conv    |-> NonZero   ]
+    [ %d       |-> Zero      ]
+    [ %div     |-> Zero      ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> Zero      ]
+    [ %5       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %c       |-> NonZero   ]
+    [ %cmp     |-> NonZero   ]
+    [ %conv    |-> NonZero   ]
+    [ %d       |-> Zero      ]
+    [ %div     |-> Zero      ]
+    [ %div1    |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   store i32 %div1, i32* %e, align 4
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> Zero      ]
+    [ %5       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %c       |-> NonZero   ]
+    [ %cmp     |-> NonZero   ]
+    [ %conv    |-> NonZero   ]
+    [ %d       |-> Zero      ]
+    [ %div     |-> Zero      ]
+    [ %div1    |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> Zero      ]
+    [ %5       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %c       |-> NonZero   ]
+    [ %cmp     |-> NonZero   ]
+    [ %conv    |-> NonZero   ]
+    [ %d       |-> Zero      ]
+    [ %div     |-> Zero      ]
+    [ %div1    |-> Uninit    ]
+    [ %e       |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+
+Instruction:   ret i32 0
+In set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> Zero      ]
+    [ %5       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %c       |-> NonZero   ]
+    [ %cmp     |-> NonZero   ]
+    [ %conv    |-> NonZero   ]
+    [ %d       |-> Zero      ]
+    [ %div     |-> Zero      ]
+    [ %div1    |-> Uninit    ]
+    [ %e       |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+Out set: 
+    [ %0       |-> Zero      ]
+    [ %1       |-> Zero      ]
+    [ %2       |-> Zero      ]
+    [ %3       |-> NonZero   ]
+    [ %4       |-> Zero      ]
+    [ %5       |-> Zero      ]
+    [ %a       |-> Zero      ]
+    [ %b       |-> Zero      ]
+    [ %c       |-> NonZero   ]
+    [ %cmp     |-> NonZero   ]
+    [ %conv    |-> NonZero   ]
+    [ %d       |-> Zero      ]
+    [ %div     |-> Zero      ]
+    [ %div1    |-> Uninit    ]
+    [ %e       |-> Uninit    ]
+    [ %retval  |-> Zero      ]
+
