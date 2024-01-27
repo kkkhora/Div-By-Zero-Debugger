@@ -1,6 +1,6 @@
 # Div-By-Zero-Debugger
 CLICK THE FOLLOWING LINK TO SEE THE PROJECT REPORT! \
-https://docs.google.com/document/d/1x5jzVgX8druM--YKSFdr4pwbbs2QE84XE9B_yZeP66c/edit?usp=drive_link
+[https://docs.google.com/document/d/1x5jzVgX8druM--YKSFdr4pwbbs2QE84XE9B_yZeP66c/edit?usp=drive_link](https://drive.google.com/file/d/1dTn74-ZBWbT72Hvci4kuHRbnqc1tGKsc/view?usp=sharing)
 
 •	Debugger1: Use Static analysis (dataflow analysis, pointer analysis) to debug "Division by Zero" issue.
 
